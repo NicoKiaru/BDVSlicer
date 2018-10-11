@@ -34,7 +34,7 @@ public class OpenBDV implements Command {
 
     @Override
     public void run() {
-        ls.info("OpenBDV -");
+        ls.info(this.getClass().toString() + " -");
         ls.info("\t - Server: "+ urlServer);
         ls.info("\t - Dataset" + datasetName);
         try {
