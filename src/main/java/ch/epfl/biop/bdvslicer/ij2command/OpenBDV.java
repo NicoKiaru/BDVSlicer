@@ -37,18 +37,13 @@ public class OpenBDV implements Command {
         ls.info("OpenBDV -");
         ls.info("\t - Server: "+ urlServer);
         ls.info("\t - Dataset" + datasetName);
-        Map<String,String> BDSList = null;
         try {
-            BDSList = BDVServerUtils.getDatasetList(urlServer);
+            Map<String,String> BDSList = BDVServerUtils.getDatasetList(urlServer);
             final String filename = BDSList.get(datasetName);
-            //urlServer+" - "+datasetName
-            BigDataViewer.open( filename, "pouet", new ProgressWriterIJ(), ViewerOptions.options() );
+            BigDataViewer.open( filename, urlServer+" - "+datasetName, new ProgressWriterIJ(), ViewerOptions.options() );
         } catch (SpimDataException e) {
             e.printStackTrace();
             ls.error("Could not create Spim data");
-            BDSList.forEach((name,url) -> {
-                ls.info("name:\t"+name+"\t url:\t"+url);
-            });
         } catch (IOException e) {
             e.printStackTrace();
         }
