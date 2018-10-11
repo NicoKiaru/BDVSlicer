@@ -11,15 +11,9 @@ import bdv.tools.InitializeViewerState;
 import bdv.tools.brightness.ConverterSetup;
 import bdv.viewer.SourceAndConverter;
 import bdv.viewer.ViewerOptions;
-import ij.ImagePlus;
 import mpicbg.spim.data.SpimDataException;
 import mpicbg.spim.data.generic.sequence.AbstractSequenceDescription;
 import net.imagej.ImageJ;
-import net.imglib2.RandomAccessibleInterval;
-import net.imglib2.img.display.imagej.ImageJFunctions;
-import net.imglib2.type.numeric.RealType;
-import net.imglib2.view.Views;
-import org.scijava.ItemIO;
 import org.scijava.command.Command;
 import org.scijava.log.LogService;
 import org.scijava.object.ObjectService;
@@ -56,9 +50,6 @@ public class OpenBDVCatchSources implements Command {
 
             final SpimDataMinimal spimData = new XmlIoSpimDataMinimal().load( xmlFilename );
 
-            //final BigDataViewer bdv = BigDataViewer.open( spimData, "Allen Mouse Brain 3D", new ProgressWriterConsole(), ViewerOptions.options() );
-            //if ( !bdv.tryLoadSettings( xmlFilename ) )
-            //	InitializeViewerState.initBrightness( 0.001, 0.999, bdv.viewer, bdv.setupAssignments );
             if ( WrapBasicImgLoader.wrapImgLoaderIfNecessary( spimData ) )
             {
                 System.err.println( "WARNING:\nOpening <SpimData> dataset that is not suited for interactive browsing.\nConsider resaving as HDF5 for better performance." );
