@@ -1,10 +1,17 @@
-This is an example Maven project implementing an ImageJ command with a Pom adapted for PT-BIOP at EPFL.
+ImageJ2 command which returns an ImgPlus object from a BigDataViewer instance.
 
-This project was initially cloned from https://github.com/imagej/example-imagej-command.git (11th October 2018)
+BDVSliceToImgPlus takes the current view and returns an ImagePlus image.
 
-It is intended as an ideal starting point to develop new ImageJ commands.
+The user needs to specify:
+* The interval in X Y and Z (Z = 0 means a single slice)
+* Interpolation
+* Source index
 
-Setting up IntelliJ IDEA with this command is detailed here (access restricted to BIOP members):
+The orientation and position and timepoint within the dataset is copied from the BigBataViewer object.
 
-https://c4science.ch/w/bioimaging_and_optics_platform_biop/image-processing/intellij-idea/
+Potential improvements:
+* A command that takes an already opened BigDataViewer and stores it into an object service; right now the slicer is only able to retrieve the BigDataViewer object if it has been put into an ObjectService
+* An automated bounding box computing based on the transformation to retrieve the whole source slice
 
+
+For discussion see on forum.image.sc https://forum.image.sc/t/bigdataviewer-bigdataserver-get-an-imageplus-image-of-the-current-slice/20138
