@@ -6,9 +6,11 @@ import mpicbg.spim.data.SpimDataException;
 import net.imagej.ImageJ;
 import org.scijava.command.Command;
 import org.scijava.log.LogService;
+import org.scijava.object.ObjectService;
 import org.scijava.plugin.Parameter;
 import org.scijava.plugin.Plugin;
 import bdv.viewer.ViewerOptions;
+import bdv.viewer.state.ViewerState;
 
 import java.io.IOException;
 import java.util.Map;
@@ -32,6 +34,9 @@ public class OpenBDV implements Command {
     @Parameter
     LogService ls;
 
+    @Parameter
+    ObjectService os;
+
     @Override
     public void run() {
         ls.info(this.getClass().toString() + " -");
@@ -40,7 +45,8 @@ public class OpenBDV implements Command {
         try {
             Map<String,String> BDSList = BDVServerUtils.getDatasetList(urlServer);
             final String filename = BDSList.get(datasetName);
-            BigDataViewer.open( filename, urlServer+" - "+datasetName, new ProgressWriterIJ(), ViewerOptions.options() );
+            BigDataViewer bdv = BigDataViewer.open( filename, urlServer+" - "+datasetName, new ProgressWriterIJ(), ViewerOptions.options() );
+            os.addObject(bdv);
         } catch (SpimDataException e) {
             e.printStackTrace();
             ls.error("Could not create Spim data");
