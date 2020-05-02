@@ -1,3 +1,5 @@
+[Obsolete : see repo bigdataviewer-biop-tools instead, which contains an improved command]
+
 ImageJ2 command which returns an ImgPlus object from a BigDataViewer instance.
 
 BDVSliceToImgPlus takes the current view and returns an ImagePlus image.
